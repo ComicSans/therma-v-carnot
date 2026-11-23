@@ -1,0 +1,30 @@
+name: Release
+
+# HACS installs the integration from the folder; a GitHub release whose tag
+# matches the version in manifest.json is all it needs. This job fails if the
+# two differ.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to check, e.g. v0.1.0"
+        required: true
+
+jobs:
+  verify-version:
+    name: Tag == manifest.json version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare versions
+        run: |
+          tag="${{ github.event.release.tag_name || github.event.inputs.tag }}"
+          tag="${tag#v}"
+          manifest=$(python3 -c "import json; print(json.load(open('custom_components/therma_v_carnot/manifest.json'))['version'])")
+          echo "Release tag: $tag, manifest.json: $manifest"
+          if [ "$tag" != "$manifest" ]; then
+            echo "::error::Release tag ($tag) differs from manifest.json ($manifest)."
+            exit 1
+          fi

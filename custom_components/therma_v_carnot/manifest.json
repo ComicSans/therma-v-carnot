@@ -1,0 +1,15 @@
+{
+  "domain": "therma_v_carnot",
+  "name": "Therma V Carnot",
+  "codeowners": [
+    "@ComicSans"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/ComicSans/therma-v-carnot",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/ComicSans/therma-v-carnot/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

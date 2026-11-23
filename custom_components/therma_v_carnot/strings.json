@@ -1,0 +1,67 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Carnot limit basis",
+        "description": "Which temperatures define the Carnot limit. Water: flow and outdoor temperature. Refrigerant: condensing and evaporating temperature. The default calibration comes from one unit; see the README.",
+        "data": {
+          "basis": "Temperature basis"
+        }
+      },
+      "entities": {
+        "title": "Source entities",
+        "description": "Entities of the heat pump firmware. Matching entities of lg-therma-v-esphome-modbus are suggested.",
+        "data": {
+          "flow_temperature": "Water flow temperature",
+          "return_temperature": "Water return temperature",
+          "outdoor_temperature": "Outdoor temperature",
+          "condensing_temperature": "Condensing temperature",
+          "evaporating_temperature": "Evaporating temperature",
+          "power": "Electric power of the heat pump",
+          "compressor_running": "Compressor running",
+          "defrost": "Defrost active (optional)"
+        }
+      }
+    },
+    "error": {
+      "same_water_entities": "Flow and return temperature must be different entities.",
+      "same_carnot_entities": "The warm and the cold temperature must be different entities."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Calibration",
+        "description": "Carnot efficiency rises linearly from the low to the high value between the two water delta T points. Auxiliary power is subtracted from the electric power before the COP is applied.",
+        "data": {
+          "efficiency_low": "Carnot efficiency at low delta T",
+          "efficiency_high": "Carnot efficiency at high delta T",
+          "delta_t_low": "Low delta T",
+          "delta_t_high": "High delta T",
+          "aux_power": "Auxiliary power"
+        }
+      }
+    },
+    "error": {
+      "invalid_delta_t": "The low delta T must be below the high delta T."
+    }
+  },
+  "selector": {
+    "basis": {
+      "options": {
+        "water": "Water temperatures (flow / outdoor)",
+        "refrigerant": "Refrigerant temperatures (condensing / evaporating)"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "carnot_cop": { "name": "Carnot COP" },
+      "carnot_efficiency": { "name": "Carnot efficiency" },
+      "cop": { "name": "Estimated COP" },
+      "heat_output": { "name": "Estimated heat output" },
+      "flow_rate": { "name": "Estimated flow rate" },
+      "heat_energy": { "name": "Estimated heat energy" }
+    }
+  }
+}
