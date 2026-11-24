@@ -1,5 +1,6 @@
 {
   "features": {
+    "bus": true,
     "handovers": true,
     "issues": true,
     "reviews": true,
